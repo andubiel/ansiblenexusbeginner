@@ -1,0 +1,22 @@
+---
+- name: Gather Data
+  hosts: leaf
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name:  get neighbors
+    nxos_get_neighbors: type=cdp host="{{ inventory_hostname }}"
+    register: my_neighbors
+
+  - name:  get routing table for mgmt VRF
+    nxos_command:
+      type: show
+      host: "{{ inventory_hostname }}"
+      command: "show ip route vrf management"
+    register: my_routes
+
+  - name: store to file
+    template: src=templates/data.j2 dest=data/{{ inventory_hostname }}_gather_data.json
+

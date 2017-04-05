@@ -1,0 +1,15 @@
+---
+
+- name: static route example
+  hosts: leaf
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    # Static route with tag and preference set
+    - nxos_static_routes: prefix=1.1.1.0/24 next_hop=10.0.0.21 tag=90 pref=80 host={{ inventory_hostname }} 
+
+    # Static route with name, 
+    - name: "Static route with name, static to CSR1000v"
+      nxos_static_routes: prefix=1.1.1.0/24 next_hop=10.0.0.21 route_name=demo vrf=default host={{ inventory_hostname }}

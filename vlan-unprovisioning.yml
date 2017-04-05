@@ -1,0 +1,19 @@
+---
+
+- name: vlan provisioning
+  hosts: leaf
+  connection: local
+  gather_facts: no
+  vars:
+    vname: name_1
+    vid: 61 
+    vrange: "2-10,20,50,55-60"
+
+  tasks:
+
+    - name: ensure vlan is removed
+      nxos_vlan: vlan_id={{ vid }} state=absent host={{ inventory_hostname }} username=cisco password=cisco
+      with_items: abc
+    - name: ensure vlan range is removed
+      nxos_vlan: vlan_range={{ vrange }} state=absent host={{ inventory_hostname }} username=cisco password=cisco
+      with_items: abc 

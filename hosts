@@ -1,0 +1,18 @@
+[all:vars]
+ansible_connection = local
+
+[spine]
+#n9k1
+#n9k2
+
+[leaf]
+nx-osv-1
+#nx-osv-2
+#csr1000v-1
+
+[wan]
+#boston  mgmt_ip=10.1.10.1
+#nyc  mgmt_ip=10.1.20.1
+#sjc
+#rtp
+#richardson
